@@ -9,22 +9,22 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <vector>
 
-void printArray(int array[], int count) {
+void printVector(std::vector<int> guessData) {
     std::cout << "Numbers Guessed: [";
-    for(int ii = 0; ii < count; ii++) {
-        if (ii < count - 1) {
-            std::cout << array[ii] << ", ";
+    for(int ii = 0; ii < guessData.size(); ii++) {
+        if (ii < guessData.size() - 1) {
+            std::cout << guessData[ii] << ", ";
         } else {
-            std::cout << array[ii];
+            std::cout << guessData[ii];
         }
     }
     std::cout << "]\n";
 }
 
 void playGame() {
-    int guesses[15];
-    int guessCount = 0;
+    std::vector<int> guesses;
     
     int random = rand() % 16;
     
@@ -32,7 +32,7 @@ void playGame() {
         std::cout << "Guess the Random number 0 < x < 15\n";
         int userGuess;
         std::cin >> userGuess;
-        guesses[guessCount++] = userGuess;
+        guesses.push_back(userGuess);
         if (userGuess == random) {
             std::cout << "You Win \n";
             break;
@@ -44,7 +44,7 @@ void playGame() {
             std::cout << "Too High\n";
         }
     }
-    printArray(guesses, guessCount);
+    printVector(guesses);
 }
 
 int main(int argc, const char * argv[]) {
