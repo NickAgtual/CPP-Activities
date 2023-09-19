@@ -10,13 +10,29 @@
 #include <cstdlib>
 #include <ctime>
 
+void printArray(int array[], int count) {
+    std::cout << "Numbers Guessed: [";
+    for(int ii = 0; ii < count; ii++) {
+        if (ii < count - 1) {
+            std::cout << array[ii] << ", ";
+        } else {
+            std::cout << array[ii];
+        }
+    }
+    std::cout << "]\n";
+}
+
 void playGame() {
+    int guesses[15];
+    int guessCount = 0;
+    
     int random = rand() % 16;
     
     while(true) {
         std::cout << "Guess the Random number 0 < x < 15\n";
         int userGuess;
         std::cin >> userGuess;
+        guesses[guessCount++] = userGuess;
         if (userGuess == random) {
             std::cout << "You Win \n";
             break;
@@ -28,11 +44,11 @@ void playGame() {
             std::cout << "Too High\n";
         }
     }
-    
+    printArray(guesses, guessCount);
 }
 
 int main(int argc, const char * argv[]) {
-    srand(time(NULL));
+    //srand(time(NULL) / 10000);
     // Declaring choice int
     int choice;
     do {
