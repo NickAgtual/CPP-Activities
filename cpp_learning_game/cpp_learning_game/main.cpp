@@ -10,6 +10,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <vector>
+#include <fstream>
 
 void printVector(std::vector<int> guessData) {
     std::cout << "Numbers Guessed: [";
@@ -27,11 +28,13 @@ void playGame() {
     std::vector<int> guesses;
     
     int random = rand() % 16;
+    int count = 0;
     
     while(true) {
         std::cout << "Guess the Random number 0 < x < 15\n";
         int userGuess;
         std::cin >> userGuess;
+        count++;
         guesses.push_back(userGuess);
         if (userGuess == random) {
             std::cout << "You Win \n";
@@ -43,6 +46,26 @@ void playGame() {
         else {
             std::cout << "Too High\n";
         }
+    }
+    
+    std::ifstream input("bestScore.txt");
+    if (!input.is_open()) {
+        std::cout << "Umable to Read File\n";
+        return;
+    }
+    int bestScore;
+    input >> bestScore;
+    
+    std::ofstream output("bestScore.txt");
+    if (!output.is_open()) {
+        std::cout << "Umable to Read File\n";
+        return;
+    }
+    
+    if (count < bestScore) {
+        output << count;
+    } else {
+        
     }
     printVector(guesses);
 }
